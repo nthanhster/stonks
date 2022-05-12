@@ -127,7 +127,7 @@ class MainApplication(tk.Frame):
         self.menu_bar.file_menu.add_command(label='Save as', command=lambda: print('Save as'))
         #---Setting's widgets---
         self.ticker_entry = TickerEntry(self.settings_frame)
-        self.plus_button = PlusButton(self.settings_frame, text=" + ", command=lambda: self.plus_button_callback())
+        self.plus_button = PlusButton(self.settings_frame, text="add", command=lambda: self.plus_button_callback())
         self.delete_button = DeleteButton(self.settings_frame, text=" Delete ", command=lambda: self.overview_listbox.delete_selection())
         self.overview_listbox = OverviewListbox(self.settings_frame)
         self.from_label = tk.Label(self.settings_frame, text="From:")
@@ -167,11 +167,12 @@ class MainApplication(tk.Frame):
 
     def click_for_plot_callback(self):
         if len(self.overview_listbox.tickers) == 0:
-            return print("ahoj")
+            pass
 
         self.chart_frame.figure_canvas.clf()
         self.chart_frame.default = self.chart_frame.figure_canvas.add_subplot(1, 1, 1)
         self.chart_frame.figure_canvas.suptitle("Show Stonks")
+        self.chart_frame.figure_canvas.autofmt_xdate(rotation=45)
 
         for tick in self.overview_listbox.tickers:
             self.chart_frame.default.plot(tick.date_series[0], tick.close_series[0], label=tick.ticker)

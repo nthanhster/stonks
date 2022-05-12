@@ -1,1 +1,4 @@
-./venv
+/venv/
+/Scripts/
+Lib/
+share/
